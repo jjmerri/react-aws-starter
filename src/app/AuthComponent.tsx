@@ -6,18 +6,6 @@ import { StaticContext } from 'react-router';
 import queryString from 'query-string';
 
 const AuthComponent: React.FC<RouteComponentProps<any, StaticContext, any>> = (props: any) => {
-  const signUpConfig = {signUpFields: [
-    {label: 'Birthdate',
-     key: 'birthdate',
-     required: true,
-     type: 'date',
-    },
-    {label: 'Address',
-     key: 'address',
-     required: true,
-     type: 'string',
-    }
-  ]};
   const handleStateChange = (state: any) => {
     if (state === 'signedIn') {
       props.onUserSignIn();
@@ -30,7 +18,7 @@ const AuthComponent: React.FC<RouteComponentProps<any, StaticContext, any>> = (p
   };
   return (
     <div>
-      <Authenticator onStateChange={handleStateChange} signUpConfig={signUpConfig}/>
+      <Authenticator onStateChange={handleStateChange}/>
     </div>
     )
 }

@@ -16,6 +16,7 @@ const Header = ({ render: C, props: childProps, ...rest }: any) => {
   return (
     <Navbar fixed className={'nav'} brand={<NavLink to='/' style={{paddingLeft: '10px'}}>Logo</NavLink>} alignLinks='right'>
       <NavLink activeClassName={'active-link'} exact={true} to='/'>Home</NavLink>
+      <NavLink activeClassName={'active-link'} exact={true} to='/secret'>Auth Protected Route</NavLink>
       {user ?
       <Dropdown trigger={<a>{user ? user!.username : 'Login'}</a>} options={{coverTrigger: false}}>
         <NavLink activeClassName={'active-link'} to={'/user-profile'}>{'Profile'}</NavLink>
