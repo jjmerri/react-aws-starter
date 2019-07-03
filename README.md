@@ -1,5 +1,5 @@
 # react-amplify-starter
-Note: You will need an AWS account to get this project integrated with AWS Amplify and Amzon Cognito
+**Note: You will need an AWS account to get this project integrated with AWS Amplify and Amzon Cognito**
 
 Install the amplify cli by running the following command:
 ```
@@ -38,5 +38,5 @@ amplify publish
 ```
 Now you should have a fully functioning app complete with authentication deployed to the cloud!
 
-##Check out the app
+## Check out the app
 Try to go to the /secret route by clicking the "Auth protected route" link in the header. You will get redirected to the login page. Create a user and login and you should be redirected to the /secret page which you can now view because you are authenticated.
