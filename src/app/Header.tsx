@@ -1,6 +1,6 @@
 import React from 'react';
 import {Navbar, Dropdown} from 'react-materialize';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 
 import './Header.css';
