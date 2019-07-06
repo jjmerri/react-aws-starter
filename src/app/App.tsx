@@ -7,7 +7,12 @@ import awsconfig from '../aws-exports';
 import Routes from './Routes';
 import Header from './Header';
 
-Amplify.configure(awsconfig);
+Amplify.configure({
+  ...awsconfig,
+  Analytics: { 
+      disabled: true
+  }
+});
 
 const App: React.FC = () => {
   const [authState, setAuthState] = useState({ isLoggedIn: false });
