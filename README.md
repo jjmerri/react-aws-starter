@@ -1,5 +1,5 @@
 
-# React Amplify Starter
+# React AWS Starter
 
 **Note: You will need an AWS account to get this project integrated with AWS using AWS Amplify. This tutorial will provision AWS resources that YOU WILL GET CHARGED for if you are not using a Free Tier AWS account!** 
 
