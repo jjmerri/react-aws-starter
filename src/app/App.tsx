@@ -4,8 +4,10 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Amplify from 'aws-amplify';
 import awsconfig from '../aws-exports';
 
-import Routes from './Routes';
 import Header from './Header';
+import Routes from '../routes/Routes';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 
 Amplify.configure({
   ...awsconfig,
@@ -13,6 +15,13 @@ Amplify.configure({
       disabled: true
   }
 });
+
+const palette = {
+  primary: { main: '#228b22' },
+  secondary: { main: '#FFA000' }
+};
+
+const theme = createMuiTheme({ palette });
 
 const App: React.FC = () => {
   const [authState, setAuthState] = useState({ isLoggedIn: false });
@@ -29,10 +38,12 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="App">
-      <Header/>
-      <Routes childProps={childProps}/>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <Header/>
+        <Routes childProps={childProps}/>
+      </div>
+    </ThemeProvider>
   );
 }
 

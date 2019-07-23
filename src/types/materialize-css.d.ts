@@ -1,1 +1,0 @@
-declare module 'materialize-csss';

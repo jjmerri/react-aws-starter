@@ -8,7 +8,7 @@ const ProtectedRoute = ({ render: C, props: childProps, ...rest }: any) => (
         <C {...rProps} {...childProps} />
       ) : (
         <Redirect
-          to={`/auth?redirect=${rProps.location.pathname}${
+          to={`/login?redirect=${rProps.location.pathname}${
             rProps.location.search
           }`}
         />

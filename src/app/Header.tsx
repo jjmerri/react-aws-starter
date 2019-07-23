@@ -1,12 +1,28 @@
 import React from 'react';
-import {Navbar, Dropdown} from 'react-materialize';
+
 import { NavLink } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 
 import './Header.css';
 import useUser from '../hooks/useUser';
+import { Toolbar, AppBar, Typography, Link, makeStyles } from '@material-ui/core';
+import NavMenu from './NavMenu';
+
+const useStyles = makeStyles(theme => ({
+  appBar: {
+    backgroundColor: theme.palette.primary.main,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
 
 const Header = ({ render: C, props: childProps, ...rest }: any) => {
+  const classes = useStyles();
+
   const [user] = useUser();
 
   const logout = ()=>{
@@ -14,17 +30,22 @@ const Header = ({ render: C, props: childProps, ...rest }: any) => {
   };
 
   return (
-    <Navbar fixed className={'nav'} brand={<NavLink to='/' style={{paddingLeft: '10px'}}>Logo</NavLink>} alignLinks='right'>
-      <NavLink activeClassName={'active-link'} exact={true} to='/'>Home</NavLink>
-      <NavLink activeClassName={'active-link'} exact={true} to='/secret'>Auth Protected Route</NavLink>
-      {user ?
-      <Dropdown trigger={<a>{user ? user!.username : 'Login'}</a>} options={{coverTrigger: false}}>
-        <NavLink activeClassName={'active-link'} to={'/user-profile'}>{'Profile'}</NavLink>
-        <NavLink to={'/'} onClick={logout}>Log Out</NavLink>
-      </Dropdown>
-      : <NavLink activeClassName={'active-link'} to='/auth'>{'Login'}</NavLink>
-      }
-    </Navbar>
+    <AppBar position="static" className={classes.appBar}>
+      <Toolbar>
+        <Typography variant="h6" className={classes.title}>
+          Logo
+        </Typography>
+
+        <Link className='header-link' color="inherit" component={NavLink} activeClassName={'active-link'} exact={true} to={'/'}>Home</Link>
+        { user ?
+              <NavMenu menuLabel={user.username}>
+                <Link className='header-link' color="inherit" component={NavLink} exact={true} to='/user-profile'>Profile</Link>
+                <Link className='header-link' color="inherit" component={NavLink} exact={true} onClick={logout} to='/'>Log Out</Link>
+              </NavMenu>
+          : <Link className='header-link' color="inherit" component={NavLink} activeClassName={'active-link'} exact={true} to='/login'>Log In</Link>
+        }
+       </Toolbar>
+    </AppBar>
   );
 };
 
