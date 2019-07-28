@@ -1,36 +1,29 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
+import AuthComponent from '../app/AuthComponent';
+import PageNotFound from '../PageNotFound/PageNotFound';
+import { UserProfile } from '../UserProfile/UserProfile';
 import ProppedRoute from './ProppedRoute';
 import ProtectedRoute from './ProtectedRoute';
-import PageNotFound from '../app/PageNotFound';
-import {UserProfile} from '../UserProfile/UserProfile';
-import AuthComponent from '../app/AuthComponent';
 
 const Routes = ({ childProps }: any) => (
   <Switch>
-    <Route exact path='/' render={() => <div>Home</div>} />
+    <Route exact path="/" render={() => <div>Home</div>} />
     <ProppedRoute
       exact
-      path='/login'
+      path="/login"
       render={AuthComponent}
       props={childProps}
     />
     <ProtectedRoute
       exact
-      path='/secret'
-      props={childProps}
-      render={() => <div>Keep it secret! Keep it safe!</div>}
-    />
-    <ProtectedRoute
-      exact
-      path='/user-profile'
+      path="/user-profile"
       props={childProps}
       render={UserProfile}
     />
-    <Route exact path='/page-not-found' render={PageNotFound} />
-    <Route exact path='/about' render={() => <div>About Content</div>} />
-    <Redirect to='page-not-found'/>
+    <Route exact path="/page-not-found" render={() => <PageNotFound />} />
+    <Redirect to="page-not-found" />
   </Switch>
 );
 

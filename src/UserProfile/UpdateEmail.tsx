@@ -4,16 +4,16 @@ import useUser from '../hooks/useUser';
 import { Paper, Typography, Button, Grid, Snackbar } from '@material-ui/core';
 import { TextField } from 'formik-material-ui';
 import { Field, Form, Formik, FormikActions, FormikProps } from 'formik';
-import { useProfileStyles } from './UserProfile';
 import { Auth } from 'aws-amplify';
 import SnackbarContentWrapper, { SnackbarVariant } from '../components/SnackbarContentWrapper';
+import { globalStyles } from '../app/App';
 
 interface ChangeEmailFormValues {
   email: string;
 }
 
 const UpdateEmail = () => {
-  const classes = useProfileStyles();
+  const classes = globalStyles();
   const [user] = useUser();
   const [initialValues, setInitialValues] = useState({ email: '' });
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -36,15 +36,15 @@ const UpdateEmail = () => {
     Auth.updateUserAttributes(user, {
       'email': values.email
     })
-    .then(() => {
-      showSnackbar(SnackbarVariant.SUCCESS, 'Email updated!');
-    })
-    .catch((error: any) => {
-      showSnackbar(SnackbarVariant.ERROR, 'Unknown error updating email. Try again later.');
-    })
-    .finally(() => {
-      actions.setSubmitting(false)
-    });
+      .then(() => {
+        showSnackbar(SnackbarVariant.SUCCESS, 'Email updated!');
+      })
+      .catch((error: any) => {
+        showSnackbar(SnackbarVariant.ERROR, 'Unknown error updating email. Try again later.');
+      })
+      .finally(() => {
+        actions.setSubmitting(false)
+      });
   }
 
   const handleCloseSnackbar = () => {
@@ -71,7 +71,7 @@ const UpdateEmail = () => {
                   variant="outlined"
                   component={TextField}
                   className={classes.textField}
-                  FormHelperTextProps={{className: classes.errorTextField}}
+                  FormHelperTextProps={{ className: classes.errorTextField }}
                   fullWidth
                 />
               </Grid>

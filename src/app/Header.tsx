@@ -1,23 +1,35 @@
-import React from 'react';
-
-import { NavLink } from 'react-router-dom';
+import {
+  AppBar,
+  Link,
+  makeStyles,
+  Toolbar,
+  Typography
+} from '@material-ui/core';
 import { Auth } from 'aws-amplify';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-import './Header.css';
 import useUser from '../hooks/useUser';
-import { Toolbar, AppBar, Typography, Link, makeStyles } from '@material-ui/core';
 import NavMenu from './NavMenu';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.primary.main
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(2)
   },
   title: {
-    flexGrow: 1,
+    flexGrow: 1
   },
+  activeLink: {
+    fontWeight: 'bold',
+    backgroundColor: 'rgba(0, 0, 0, 0.08)',
+    padding: '5px 10px 5px 10px'
+  },
+  headerLink: {
+    padding: '5px 10px 7px 10px'
+  }
 }));
 
 const Header = ({ render: C, props: childProps, ...rest }: any) => {
@@ -25,26 +37,62 @@ const Header = ({ render: C, props: childProps, ...rest }: any) => {
 
   const [user] = useUser();
 
-  const logout = ()=>{
+  const logout = () => {
     Auth.signOut();
   };
 
   return (
-    <AppBar position="static" className={classes.appBar}>
+    <AppBar position='static' className={classes.appBar}>
       <Toolbar>
-        <Typography variant="h6" className={classes.title}>
+        <Typography variant='h6' className={classes.title}>
           Logo
         </Typography>
 
-        <Link className='header-link' color="inherit" component={NavLink} activeClassName={'active-link'} exact={true} to={'/'}>Home</Link>
-        { user ?
-              <NavMenu menuLabel={user.username}>
-                <Link className='header-link' color="inherit" component={NavLink} exact={true} to='/user-profile'>Profile</Link>
-                <Link className='header-link' color="inherit" component={NavLink} exact={true} onClick={logout} to='/'>Log Out</Link>
-              </NavMenu>
-          : <Link className='header-link' color="inherit" component={NavLink} activeClassName={'active-link'} exact={true} to='/login'>Log In</Link>
-        }
-       </Toolbar>
+        <Link
+          className={classes.headerLink}
+          color='inherit'
+          component={NavLink}
+          activeClassName={classes.activeLink}
+          exact={true}
+          to={'/'}
+        >
+          Home
+        </Link>
+        {user ? (
+          <NavMenu menuLabel={user.username}>
+            <Link
+              className={classes.headerLink}
+              color='inherit'
+              component={NavLink}
+              exact={true}
+              to='/user-profile'
+            >
+              Profile
+            </Link>
+            <Link
+              className={classes.headerLink}
+              color='inherit'
+              component={NavLink}
+              exact={true}
+              onClick={logout}
+              to='/'
+            >
+              Log Out
+            </Link>
+          </NavMenu>
+        ) : (
+          <Link
+            className={classes.headerLink}
+            color='inherit'
+            component={NavLink}
+            activeClassName={classes.activeLink}
+            exact={true}
+            to='/login'
+          >
+            Log In
+          </Link>
+        )}
+      </Toolbar>
     </AppBar>
   );
 };

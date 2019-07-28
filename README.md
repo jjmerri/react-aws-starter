@@ -48,4 +48,4 @@ Now you should have a fully functioning app complete with authentication deploye
 
 ## Check out the app
 
-Try to go to the /secret route by clicking the "Auth protected route" link in the header. If you are not logged in you will get redirected to the login page. Create a user and login and you should be redirected to the /secret page which you can now view because you are authenticated.
+Try to go to the [/user-profile](http://localhost:3000/page-not-found) route. If you are not logged in you will get redirected to the login page. Create a user and login and you should be redirected to the /user-profile page which you can now view because you are authenticated.
